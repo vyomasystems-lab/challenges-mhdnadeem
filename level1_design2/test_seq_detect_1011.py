@@ -22,5 +22,34 @@ async def test_seq_bug1(dut):
     await FallingEdge(dut.clk)  
     dut.reset.value = 0
     await FallingEdge(dut.clk)
+    A = 1
+    B = 0
+    dut.inp_bit.value = 1
+    await FallingEdge(dut.clk)
+    dut.inp_bit.value = 1
+    await FallingEdge(dut.clk)
+    dut.inp_bit.value = 0
+    await FallingEdge(dut.clk)
+    dut.inp_bit.value = 0
+    await FallingEdge(dut.clk)
+    dut.inp_bit.value = 1
+    await FallingEdge(dut.clk)
+    dut.inp_bit.value = 0
+    await FallingEdge(dut.clk)
+    dut.inp_bit.value = 1
+    await FallingEdge(dut.clk)
+    dut.inp_bit.value = 1
+    await FallingEdge(dut.clk)  
+    cocotb.log.info(f'inp_bit = {11001011} model = {1} DUT = {int(dut.seq_seen.value)}')
+    dut.inp_bit.value = 1
+    await FallingEdge(dut.clk)
+    dut.inp_bit.value = 0
+    await FallingEdge(dut.clk)
+    dut.inp_bit.value = 1
+    await FallingEdge(dut.clk)
+    dut.inp_bit.value = 1
+    await FallingEdge(dut.clk)
+ 
 
-    cocotb.log.info('#### CTB: Develop your test here! ######')
+    cocotb.log.info(f'inp_bit = {11001011011} model = {1} DUT = {int(dut.seq_seen.value)}')
+    assert dut.seq_seen.value == 1, f'MUX result is incorrect: {dut.seq_seen.value} !=1'

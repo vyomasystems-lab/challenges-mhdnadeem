@@ -36,7 +36,7 @@ def run_test(dut):
     # input transaction
     mav_putvalue_src1 = 0x5
     mav_putvalue_src2 = 0x0
-    mav_putvalue_src3 = 0x0
+    mav_putvalue_src3 = 0x1
     mav_putvalue_instr = 0x101010B3
 
     # expected output from the model
